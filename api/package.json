@@ -4,10 +4,16 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
-    "@types/mysql": "^2.15.21",
+    "@types/express-session": "^1.17.6",
+    "@types/passport": "^1.0.11",
+    "@types/passport-local": "^1.0.35",
+    "argon2": "^0.30.3",
     "cors": "^2.8.5",
     "express": "^4.18.2",
-    "mysql": "^2.18.1",
+    "express-session": "^1.17.3",
+    "mysql2": "^3.1.2",
+    "passport": "^0.6.0",
+    "passport-local": "^1.0.0",
     "typescript": "^4.9.4"
   },
   "scripts": {

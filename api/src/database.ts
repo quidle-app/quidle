@@ -1,16 +1,11 @@
-import mysql from "mysql";
+import mysql from "mysql2/promise";
 
-const db = mysql.createConnection({
+const conn = mysql.createPool({
     host: "localhost",
     user: "root",
-    password: "toor"
+    password: "toor",
+    database: "quidle",
+    connectionLimit: 10
 })
 
-db.connect(err => {
-    if (err) {
-        throw err;
-    }
-    console.log("connected do database");
-});
-
-export default db;
+export default conn;
