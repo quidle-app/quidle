@@ -1,8 +1,8 @@
 import express from 'express';
 import cors from 'cors';
-import routes from './routes';
+import router from './router';
 import passport from "passport";
-import {session, createStrategy, serializeUser, deserializeUser} from "./session";
+import {session} from "./session";
 
 const server = express();
 
@@ -13,10 +13,6 @@ server.use(session)
 server.use(passport.initialize());
 server.use(passport.session());
 
-server.use(routes);
-
-passport.use(createStrategy());
-passport.serializeUser(serializeUser)
-passport.deserializeUser(deserializeUser)
+server.use("/api", router);
 
 export default server;
