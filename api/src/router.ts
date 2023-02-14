@@ -11,6 +11,9 @@ const authRouter = Router();
 
 router.post("/auth/login", passport.authenticate("local"), Login)
 router.post("/auth/register", Register)
+router.post("/auth/logout", (req, res) => {
+    req.session.destroy(() => res.send({message: "success"}))
+})
 
 // /api/user/:routes
 router.use("/user", authMiddleware, authRouter);

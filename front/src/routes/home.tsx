@@ -1,18 +1,10 @@
-import {useEffect, useState} from 'react'
-import axios from 'axios';
-
 function Home() {
-    const [message, setMessage] = useState("");
-
-    useEffect(() => {
-        axios("http://localhost:3333/api/hello").then(r => {
-            setMessage(r.data.message);
-        })
-    }, []);
-
     return (
-        <div className="App">
-            {message}
+        <div>
+            <h2>Witaj</h2>
+            <p>
+                Taki quizlet i moodle w jednym... <b>ale gorsze!</b>
+            </p>
         </div>
     )
 }

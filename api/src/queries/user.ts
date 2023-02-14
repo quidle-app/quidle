@@ -1,4 +1,5 @@
-import conn from "../database";
+import conn, {query} from "../database";
+import {ResultSetHeader} from "mysql2";
 
 type UserQuery = {
     id: number
@@ -11,8 +12,6 @@ export async function searchUser(user: string) {
 }
 
 export async function createUser(user: string, hash: string) {
-    const local = await conn.getConnection();
-    await local.beginTransaction();
-    await local.query("INSERT INTO users SET user = ?, hash = ?", [user, hash]);
-    await local.commit();
+    const res = await query("INSERT INTO users SET user = ?, hash = ?", [user, hash]);
+    return (res[0] as ResultSetHeader).insertId;
 }
