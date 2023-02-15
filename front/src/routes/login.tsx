@@ -3,7 +3,6 @@ import axios from "axios";
 import {useContext} from "react";
 import {userStore} from "../user";
 import {useLoggedOut} from "../Hooks/auth";
-import {toast} from "react-toastify";
 import {success} from "./success";
 
 function Login() {
@@ -12,16 +11,12 @@ function Login() {
     useLoggedOut();
 
     async function handle(data: FieldValues) {
-        try {
-            const res = await axios.post("/api/auth/login", {
-                login: data["login"],
-                password: data["password"]
-            })
-            if (success(res)) {
-                user.update();
-            }
-        } catch (err: any) {
-            toast.error("Nieprawdiłowe dane logowania");
+        const res = await axios.post("/api/auth/login", {
+            login: data["login"],
+            password: data["password"]
+        })
+        if (success(res)) {
+            user.update();
         }
     }
 

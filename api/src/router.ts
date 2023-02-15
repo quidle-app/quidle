@@ -9,7 +9,7 @@ import {authMiddleware} from "./session";
 const router = Router();
 const authRouter = Router();
 
-router.post("/auth/login", passport.authenticate("local"), Login)
+router.post("/auth/login", Login)
 router.post("/auth/register", Register)
 router.post("/auth/logout", (req, res) => {
     req.session.destroy(() => res.send({message: "success"}))

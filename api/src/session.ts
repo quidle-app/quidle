@@ -20,7 +20,7 @@ export type User = {
 const password_verify: VerifyFunction = async (user, password, done) => {
     let rows = await searchUser(user);
     if (rows.length != 1 || !await argon.verify(rows[0].hash, password)) {
-        return done(null, false, {message: "incorrect username or password"});
+        return done(null, false, {message: "invalid credentials"});
     }
     return done(null, {
         username: user,

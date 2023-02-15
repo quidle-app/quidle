@@ -1,12 +1,32 @@
 import {Request, Response} from "express";
 import {User} from "../session";
+import passport from "passport";
 
 async function Login(req: Request, res: Response) {
-    let user = (req.user as User).username;
-    res.send({
-        result: "success",
-        message: `Hello, ${user}`
-    });
+    passport.authenticate("local", (err, user) => {
+        if (!user) {
+            err = "invalid credentials";
+        }
+
+        if (err) {
+            return res.send({
+                result: "error",
+                message: err
+            })
+        }
+
+        req.login(user, (err) => {
+            if (err) {
+                return res.send({
+                    result: "error",
+                    message: err
+                })
+            }
+
+            res.send({result: "success"})
+        });
+
+    })(req, res);
 }
 
 export default Login;

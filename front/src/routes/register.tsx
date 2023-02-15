@@ -3,7 +3,6 @@ import axios from "axios";
 import {useContext} from "react";
 import {userStore} from "../user";
 import {useLoggedOut} from "../Hooks/auth";
-import {toast} from "react-toastify";
 import {success} from "./success";
 
 function Register() {
