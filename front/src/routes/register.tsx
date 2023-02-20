@@ -30,7 +30,7 @@ function Register() {
                 </div>
                 <div>
                     <label>Hasło</label>
-                    <input type="password" {...register("password", {required: true})}/>
+                    <input {...register("password", {required: true})} type="password"/>
                 </div>
                 <div>
                     <input type="submit" value="Utwórz konto"/>

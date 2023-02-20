@@ -1,30 +1,36 @@
-import React, {useState} from 'react'
+import React from 'react'
 import ReactDOM from 'react-dom/client'
 import Home from './routes/home'
-import {HashRouter, Route, Routes} from "react-router-dom";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Layout from "./layout";
 import Login from "./routes/login";
 import useAuth, { userStore } from "./user";
 import Profile from "./routes/profile";
 import Logout from "./routes/logout";
 import Register from "./routes/register";
+import CreateQuiz from "./routes/quiz/create";
+import ViewQuiz from './routes/quiz/view';
 
 function App() {
     const [user] = useAuth();
 
     return (
         <userStore.Provider value={user}>
-            <HashRouter>
+            <BrowserRouter>
                 <Routes>
                     <Route path="/" element={<Layout/>}>
                         <Route index element={<Home/>}/>
-                        <Route path="/profile" element={<Profile/>}/>
-                        <Route path="/login" element={<Login/>}/>
-                        <Route path="/register" element={<Register/>}/>
-                        <Route path="/logout" element={<Logout/>}/>
+                        <Route path="profile" element={<Profile/>}/>
+                        <Route path="login" element={<Login/>}/>
+                        <Route path="register" element={<Register/>}/>
+                        <Route path="logout" element={<Logout/>}/>
+                        <Route path="quiz">
+                            <Route path="create" element={<CreateQuiz/>}/>
+                            <Route path=":id" element={<ViewQuiz/>}/>
+                        </Route>
                     </Route>
                 </Routes>
-            </HashRouter>
+            </BrowserRouter>
         </userStore.Provider>
     )
 }

@@ -21,4 +21,8 @@ const conn = mysql.createPool({
 //     }
 // }
 
+export async function tryQuery() {
+
+}
+
 export default conn;
