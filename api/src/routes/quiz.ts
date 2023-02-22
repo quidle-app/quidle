@@ -1,9 +1,17 @@
 import {Request, Response} from "express";
-import {createQuiz, searchQuizzes} from "../queries/quiz";
+import {createQuiz, searchQuiz, searchQuizzes} from "../queries/quiz";
 import {User} from "../session";
 
 export async function ListQuizzes(req: Request, res: Response) {
     let rows = await searchQuizzes();
+    res.send({
+        result: "success",
+        data: rows
+    })
+}
+
+export async function ListQuiz(req: Request, res: Response) {
+    let rows = await searchQuiz(parseInt(req.params["id"]));
     res.send({
         result: "success",
         data: rows

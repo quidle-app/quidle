@@ -26,11 +26,11 @@ function Login() {
             <form onSubmit={handleSubmit(handle)}>
                 <div>
                     <label>Login</label>
-                    <input {...register("login", {required: true})}/>
+                    <input {...register("login", {required: true})} autoFocus={true}/>
                 </div>
                 <div>
                     <label>Hasło</label>
-                    <input type="password" {...register("password", {required: true})}/>
+                    <input {...register("password", {required: true})} type="password"/>
                 </div>
                 <div>
                     <input type="submit" value="Zaloguj"/>

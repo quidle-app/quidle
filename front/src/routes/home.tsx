@@ -1,9 +1,12 @@
 import {useContext} from "react";
 import {userStore} from "../user";
 import {Link} from "react-router-dom";
+import {useFetchQuizzes} from "../Hooks/fetchQuizzes";
+import ListQuiz from "./quiz/list";
 
 function Home() {
     const user = useContext(userStore);
+    const [list] = useFetchQuizzes();
 
     if (!user.loggedIn) return (
         <div>
@@ -18,6 +21,7 @@ function Home() {
         <div>
             <h2>Lista quizów</h2>
             <Link to="/quiz/create">Dodaj nowy</Link>
+            <ListQuiz list={list}/>
         </div>
     )
 }

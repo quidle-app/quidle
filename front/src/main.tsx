@@ -10,6 +10,7 @@ import Logout from "./routes/logout";
 import Register from "./routes/register";
 import CreateQuiz from "./routes/quiz/create";
 import ViewQuiz from './routes/quiz/view';
+import EditQuiz from "./routes/quiz/edit";
 
 function App() {
     const [user] = useAuth();
@@ -27,6 +28,7 @@ function App() {
                         <Route path="quiz">
                             <Route path="create" element={<CreateQuiz/>}/>
                             <Route path=":id" element={<ViewQuiz/>}/>
+                            <Route path="edit/:id" element={<EditQuiz/>}/>
                         </Route>
                     </Route>
                 </Routes>
