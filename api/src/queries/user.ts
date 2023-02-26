@@ -1,4 +1,4 @@
-import conn from "../database";
+import pool, {transactionQuery} from "../database";
 import {ResultSetHeader} from "mysql2";
 
 type UserQuery = {
@@ -7,11 +7,11 @@ type UserQuery = {
 }
 
 export async function searchUser(user: string) {
-    const [rows] = await conn.query("SELECT id, hash FROM users WHERE user = ?", [user]);
+    const [rows] = await pool.query("SELECT id, hash FROM users WHERE user = ?", [user]);
     return rows as UserQuery[];
 }
 
 export async function createUser(user: string, hash: string) {
-    const res = await conn.query("INSERT INTO users SET user = ?, hash = ?", [user, hash]);
+    const res = await transactionQuery("INSERT INTO users SET user = ?, hash = ?", [user, hash]);
     return (res[0] as ResultSetHeader).insertId;
 }

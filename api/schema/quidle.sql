@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0-2.fc37
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Czas generowania: 20 Lut 2023, 18:51
--- Wersja serwera: 10.5.18-MariaDB
--- Wersja PHP: 8.1.15
+-- Czas generowania: 26 Lut 2023, 23:10
+-- Wersja serwera: 10.9.4-MariaDB
+-- Wersja PHP: 8.2.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -78,19 +78,22 @@ CREATE TABLE `users` (
 -- Indeksy dla tabeli `answers`
 --
 ALTER TABLE `answers`
-  ADD PRIMARY KEY (`answer_id`);
+  ADD PRIMARY KEY (`answer_id`),
+  ADD KEY `question_id` (`question_id`);
 
 --
 -- Indeksy dla tabeli `questions`
 --
 ALTER TABLE `questions`
-  ADD PRIMARY KEY (`question_id`);
+  ADD PRIMARY KEY (`question_id`),
+  ADD KEY `quiz_id` (`quiz_id`);
 
 --
 -- Indeksy dla tabeli `quizzes`
 --
 ALTER TABLE `quizzes`
-  ADD PRIMARY KEY (`quiz_id`);
+  ADD PRIMARY KEY (`quiz_id`),
+  ADD KEY `user_id` (`user_id`);
 
 --
 -- Indeksy dla tabeli `users`
@@ -126,6 +129,28 @@ ALTER TABLE `quizzes`
 --
 ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- Ograniczenia dla zrzutów tabel
+--
+
+--
+-- Ograniczenia dla tabeli `answers`
+--
+ALTER TABLE `answers`
+  ADD CONSTRAINT `answers_ibfk_1` FOREIGN KEY (`question_id`) REFERENCES `questions` (`question_id`);
+
+--
+-- Ograniczenia dla tabeli `questions`
+--
+ALTER TABLE `questions`
+  ADD CONSTRAINT `questions_ibfk_1` FOREIGN KEY (`quiz_id`) REFERENCES `quizzes` (`quiz_id`);
+
+--
+-- Ograniczenia dla tabeli `quizzes`
+--
+ALTER TABLE `quizzes`
+  ADD CONSTRAINT `quizzes_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

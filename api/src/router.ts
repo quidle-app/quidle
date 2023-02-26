@@ -5,6 +5,7 @@ import Status from "./routes/status";
 import {authMiddleware} from "./session";
 import {CreateQuiz, ListQuiz, ListQuizzes} from "./routes/quiz";
 import asyncHandler from "express-async-handler";
+import {NewQuestion} from "./routes/question";
 
 // /api/:routes
 const router = Router();
@@ -24,7 +25,7 @@ authRouter.get("/status", Status)
 authRouter.get("/quiz/list", asyncHandler(ListQuizzes))
 authRouter.get("/quiz/:id", asyncHandler(ListQuiz))
 
-authRouter.put("/quiz/:id/question", asyncHandler(ListQuiz))
+authRouter.put("/quiz/:id/question", asyncHandler(NewQuestion))
 
 authRouter.post("/quiz/create", asyncHandler(CreateQuiz))
 

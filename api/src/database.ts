@@ -1,28 +1,47 @@
-import mysql from "mysql2/promise";
+import mysql, {Connection} from "mysql2/promise";
 
-const conn = mysql.createPool({
+const pool = mysql.createPool({
     host: "localhost",
     user: "root",
     password: "toor",
     database: "quidle",
     connectionLimit: 10
-})
+});
 
-// export async function query(sql: string, values: any) {
-//     const local = await conn.getConnection();
-//     let res;
-//     try {
-//         res = await local.query(sql, values);
-//         local.destroy()
-//         return res;
-//     } catch (e) {
-//         local.destroy()
-//         throw e;
-//     }
-// }
-
-export async function tryQuery() {
-
+// returns connection from the pool with started transaction
+export async function getConn() {
+    return (await pool.getConnection()) as Connection;
 }
 
-export default conn;
+export async function closeConn(conn: Connection) {
+    await conn.commit();
+    await conn.destroy();
+}
+
+export async function transactionQuery(sql: string, values: any) {
+    const conn = await pool.getConnection();
+    let res;
+    try {
+        conn.beginTransaction();
+        res = await conn.query(sql, values);
+        await conn.commit();
+        conn.destroy();
+        return res;
+    } catch (e) {
+        await conn.rollback();
+        await conn.destroy();
+        throw e;
+    }
+}
+
+export async function queryOrDestroy(conn: Connection, sql: string, values: any) {
+    try {
+        return await conn.query(sql, values);
+    } catch (err) {
+        await conn.rollback();
+        conn.destroy();
+        throw err;
+    }
+}
+
+export default pool;

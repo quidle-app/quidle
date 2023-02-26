@@ -17,3 +17,14 @@ export function Show({when, fallback, children}: ShowProps) {
 
     return null;
 }
+
+type ForProps<T> = {
+    each: T[],
+    children: (item: T) => JSX.Element,
+}
+
+export const For = <T,>({each, children}: ForProps<T>) => (
+    <>
+        {each.map(children)}
+    </>
+)

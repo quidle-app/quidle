@@ -1,5 +1,4 @@
 import {Request, Response} from "express";
-import {User} from "../session";
 import passport from "passport";
 
 async function Login(req: Request, res: Response) {
