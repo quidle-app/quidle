@@ -71,7 +71,7 @@ function AddQuestion({quiz_id, callback}: AddQuestionProps) {
             }
         }
 
-        const res = await axios.put(`/api/user/quiz/${quiz_id}/question`, {
+        const res = await axios.post(`/api/user/quiz/${quiz_id}/question`, {
             quiz_id: parseInt(quiz_id ?? ""),
             content: content,
             answers: answers

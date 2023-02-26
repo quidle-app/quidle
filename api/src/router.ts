@@ -25,7 +25,8 @@ authRouter.get("/status", Status)
 authRouter.get("/quiz/list", asyncHandler(ListQuizzes))
 authRouter.get("/quiz/:id", asyncHandler(ListQuiz))
 
-authRouter.put("/quiz/:id/question", asyncHandler(NewQuestion))
+authRouter.post("/quiz/:id/question", asyncHandler(NewQuestion))
+//authRouter.put("/quiz/:id/question", asyncHandler(EditQuestion))
 
 authRouter.post("/quiz/create", asyncHandler(CreateQuiz))
 
