@@ -1,17 +1,9 @@
 import {Request, Response} from "express";
 import {createQuiz, searchQuiz, searchQuizzes} from "../queries/quiz";
-import {User} from "../session";
+import {searchAnswers, searchQuestions} from "../queries/question";
 
 export async function ListQuizzes(req: Request, res: Response) {
-    let rows = await searchQuizzes();
-    res.send({
-        result: "success",
-        data: rows
-    })
-}
-
-export async function ListQuiz(req: Request, res: Response) {
-    let rows = await searchQuiz(parseInt(req.params["id"]));
+    const rows = await searchQuizzes();
     res.send({
         result: "success",
         data: rows
@@ -19,11 +11,28 @@ export async function ListQuiz(req: Request, res: Response) {
 }
 
 export async function CreateQuiz(req: Request, res: Response) {
-    let id = await createQuiz((req.user as User).id, req.body.name);
+    const id = await createQuiz(req.user?.id, req.body.name);
     res.send({
         result: "success",
         message: {
             id: id
         }
+    })
+}
+
+export async function QuizData(req: Request, res: Response) {
+    const quiz_id = parseInt(req.params["id"])
+    const quiz_data = await searchQuiz(quiz_id);
+    const questions = await searchQuestions(quiz_id);
+
+    for (const question of questions) {
+        question.answers = await searchAnswers(question.question_id);
+    }
+
+    quiz_data.questions = questions;
+
+    res.send({
+        result: "success",
+        data: quiz_data
     })
 }

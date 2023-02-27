@@ -2,7 +2,7 @@ import pool, {transactionQuery} from "../database";
 import {ResultSetHeader} from "mysql2";
 
 type UserQuery = {
-    id: number
+    id: number,
     hash: string
 }
 

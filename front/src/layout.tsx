@@ -99,6 +99,7 @@ const Wrapper = styled.div`
     border-radius: 7px;
     display: flex;
     justify-content: center;
+    text-align: center;
   }
 `;
 

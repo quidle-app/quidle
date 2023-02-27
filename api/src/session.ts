@@ -5,6 +5,15 @@ import {searchUser} from "./queries/user";
 import passport from "passport";
 import {Request, Response} from "express";
 
+declare global {
+    namespace Express {
+        interface User {
+            id: number
+            username: string
+        }
+    }
+}
+
 export const session = Session({
     secret: "secret",
     saveUninitialized: true,
@@ -12,7 +21,7 @@ export const session = Session({
     resave: false,
 });
 
-export type User = {
+type User = {
     username: string,
     id: number
 }

@@ -3,6 +3,8 @@ import axios from "axios";
 import {success} from "../success";
 import {useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
+import IconButton from "../../Elems/iconButton";
+import {faFloppyDisk} from "@fortawesome/free-solid-svg-icons";
 
 function CreateQuiz() {
     const {register, handleSubmit} = useForm();
@@ -33,8 +35,9 @@ function CreateQuiz() {
                     <label>Nazwa quizu</label>
                     <input {...register("title", {required: true})}/>
                 </div>
-                <div>
-                    <input type="submit" value="Dodaj"/>
+
+                <div className="flex-row">
+                    <IconButton icon={faFloppyDisk}/>
                 </div>
             </form>
         </div>

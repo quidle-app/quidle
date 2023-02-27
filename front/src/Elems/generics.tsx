@@ -3,7 +3,7 @@ import {ReactNode} from "react";
 type ShowProps = {
     when: boolean,
     fallback?: JSX.Element,
-    children?: ReactNode,
+    children?: ReactNode
 }
 
 export function Show({when, fallback, children}: ShowProps) {
@@ -20,7 +20,7 @@ export function Show({when, fallback, children}: ShowProps) {
 
 type ForProps<T> = {
     each: T[],
-    children: (item: T) => JSX.Element,
+    children: (item: T, index?: number) => JSX.Element
 }
 
 export const For = <T,>({each, children}: ForProps<T>) => (

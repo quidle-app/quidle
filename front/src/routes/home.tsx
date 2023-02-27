@@ -1,8 +1,8 @@
 import {useContext} from "react";
 import {userStore} from "../user";
-import {Link} from "react-router-dom";
 import {useFetchQuizzes} from "../Hooks/fetchQuizzes";
 import ListQuiz from "./quiz/list";
+import LinkButton from "../Elems/linkButton";
 
 function Home() {
     const user = useContext(userStore);
@@ -20,7 +20,7 @@ function Home() {
     return (
         <div>
             <h2>Lista quizów</h2>
-            <Link to="/quiz/create">Dodaj nowy</Link>
+            <LinkButton to="/quiz/create">Dodaj nowy</LinkButton>
             <ListQuiz list={list}/>
         </div>
     )

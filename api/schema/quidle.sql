@@ -37,13 +37,13 @@ CREATE TABLE `answers` (
 -- --------------------------------------------------------
 
 --
--- Struktura tabeli dla tabeli `questions`
+-- Struktura tabeli dla tabeli `question`
 --
 
 CREATE TABLE `questions` (
   `question_id` int(11) NOT NULL,
   `quiz_id` int(11) NOT NULL,
-  `content` text NOT NULL
+  `answer` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 -- --------------------------------------------------------
@@ -82,7 +82,7 @@ ALTER TABLE `answers`
   ADD KEY `question_id` (`question_id`);
 
 --
--- Indeksy dla tabeli `questions`
+-- Indeksy dla tabeli `question`
 --
 ALTER TABLE `questions`
   ADD PRIMARY KEY (`question_id`),
@@ -113,7 +113,7 @@ ALTER TABLE `answers`
   MODIFY `answer_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT dla tabeli `questions`
+-- AUTO_INCREMENT dla tabeli `question`
 --
 ALTER TABLE `questions`
   MODIFY `question_id` int(11) NOT NULL AUTO_INCREMENT;
@@ -141,7 +141,7 @@ ALTER TABLE `answers`
   ADD CONSTRAINT `answers_ibfk_1` FOREIGN KEY (`question_id`) REFERENCES `questions` (`question_id`);
 
 --
--- Ograniczenia dla tabeli `questions`
+-- Ograniczenia dla tabeli `question`
 --
 ALTER TABLE `questions`
   ADD CONSTRAINT `questions_ibfk_1` FOREIGN KEY (`quiz_id`) REFERENCES `quizzes` (`quiz_id`);

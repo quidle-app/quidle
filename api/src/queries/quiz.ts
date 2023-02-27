@@ -1,9 +1,11 @@
 import pool, {transactionQuery} from "../database";
 import {ResultSetHeader} from "mysql2";
+import {QuestionQuery} from "./question";
 
 type QuizQuery = {
-    user_id: number
-    name: string
+    user_id: number,
+    name: string,
+    questions: QuestionQuery[] | undefined
 }
 
 export async function searchQuiz(quiz_id: number) {
