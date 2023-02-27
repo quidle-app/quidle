@@ -1,0 +1,22 @@
+services:
+  database:
+    image: mariadb:latest
+    environment:
+      MARIADB_ROOT_PASSWORD: "toor"
+    volumes:
+      - ./schema/quidle.sql:/docker-entrypoint-initdb.d/quidle.sql
+      - db-data:/var/lib/mysql
+  backend:
+    build:
+      "./api"
+    depends_on:
+      - database
+  frontend:
+    build:
+      "./front"
+    ports:
+      - 8080:4173
+    depends_on:
+      - backend
+volumes:
+  db-data:

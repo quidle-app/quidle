@@ -21,7 +21,7 @@ export const session = Session({
     resave: false,
 });
 
-type User = {
+export type User = {
     username: string,
     id: number
 }

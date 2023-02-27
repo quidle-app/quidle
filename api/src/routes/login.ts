@@ -1,8 +1,9 @@
-import {Request, Response} from "express";
+import express, {Request, Response} from "express";
 import passport from "passport";
+import {User} from "../session";
 
 async function Login(req: Request, res: Response) {
-    passport.authenticate("local", (err, user) => {
+    passport.authenticate("local", (err: any, user: User) => {
         if (!user) {
             err = "invalid credentials";
         }

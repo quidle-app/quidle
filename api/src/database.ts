@@ -1,7 +1,9 @@
 import mysql, {Connection} from "mysql2/promise";
 
+const host = (process.env.NODE_ENV === "production") ? "database" : "localhost";
+
 const pool = mysql.createPool({
-    host: "localhost",
+    host: host,
     user: "root",
     password: "toor",
     database: "quidle",

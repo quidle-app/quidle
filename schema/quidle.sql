@@ -1,3 +1,8 @@
+-- create database
+CREATE DATABASE quidle CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+USE quidle;
+
 -- phpMyAdmin SQL Dump
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
@@ -30,7 +35,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `answers` (
   `answer_id` int(11) NOT NULL,
   `question_id` int(11) NOT NULL,
-  `content` text NOT NULL,
+  `answer` text NOT NULL,
   `correct` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
@@ -43,7 +48,7 @@ CREATE TABLE `answers` (
 CREATE TABLE `questions` (
   `question_id` int(11) NOT NULL,
   `quiz_id` int(11) NOT NULL,
-  `answer` text NOT NULL
+  `content` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 -- --------------------------------------------------------
