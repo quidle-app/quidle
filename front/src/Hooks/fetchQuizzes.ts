@@ -11,6 +11,11 @@ export function useFetchQuizzes(user_id?: number) {
     const [data, setData] = useState<QuizInfo[]>([]);
     useEffect(() => {
         axios.get("/api/user/quiz/list").then(res => {
+            if (res.data.result != "success") {
+                setData([]);
+                return;
+            }
+
             let data = res.data.data;
 
             if (user_id) {

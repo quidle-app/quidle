@@ -11,6 +11,7 @@ function Logout() {
 
     useEffect(() => {
         axios.post("/api/auth/logout").then(() => {
+            sessionStorage.removeItem("loggedIn");
             user.update();
             navigate("/");
         });
